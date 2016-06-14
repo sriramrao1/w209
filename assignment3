@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>D3: A true bar chart with SVG rects</title>
+		<script type="text/javascript" src="d3.js"></script>
+		<style type="text/css">
+			/* No style rules here yet */		
+		</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+			//Width and height
+			var w = 1000;
+			var h = 500;
+			var barPadding = 2;
+			//dataset - # of steps walked by day
+			var dataset = [ 1951, 5823, 4021, 1127, 1722, 4727, 2348, 1483, 1664, 3803, 3235, 5424, 5721, 5541, 
+			                4025, 3744, 754, 1969, 4637, 3995, 6623, 5067, 2461, 11058, 1986, 3450, 10850, 3516];
+								
+			//Create SVG element
+			var svg = d3.select("body")
+						.append("svg")
+						.attr("width", w)
+						.attr("height", h);
+			svg.selectAll("rect")
+			   .data(dataset)
+			   .enter()
+			   .append("rect")
+			   .attr("x", function(d, i) {
+			   		return i * (w / dataset.length);
+			   })
+			   .attr("y", function(d) {
+			   		return h - (d/30);
+			   })
+			   .attr("width", w / dataset.length - barPadding)
+			   .attr("height", function(d) {
+			   		return d/30 ;
+			   })
+			   .attr("fill", "#1f77b4");
+			
+			var axs = d3.select("body").append("svg")
+						.attr("class", "axis")
+						.attr("width", 1000)
+						.attr("height", 20)
+						.append("g")
+						.attr("transform", "translate(0,30)")
+						.call(axis);
+		</script>
+	</body>
+</html>
