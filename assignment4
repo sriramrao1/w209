@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Assignment 4 - Sriram Rao</title>
+		<script type="text/javascript" src="d3.js"></script>
+		<style type="text/css">
+			.axis path, 
+			.axis line { fill: none; stroke: black; shape-rendering: crispEdges; } 
+			.axis text { font-family: sans-serif; font-size: 11px; }
+			rect:hover {
+				fill: orange;
+			}
+		</style>
+	</head>
+	<body>
+		<p><input id="btn1" type="submit" value="SUBMIT">Click this button to see the number of additional steps Sriram should have walked to meet the 10000 steps per day requirement</p>
+		<!--p>Click on this text to update the chart with new data values (once).</p-->
+		<script type="text/javascript">
+		
+			
+// TO DO: get the data from a CSV file
+// TO DO: Move the chart down so 11,000 is visible 
+//        Define class for text - use in heading and x-axis label
+
+			//Width and height
+			var margin = {top: 20, right: 30, bottom: 50, left: 70};
+			
+			var w = 1000 - margin.left - margin.right;
+			var h = 500 - margin.top - margin.bottom;
+						
+			var barPadding = 2;
+			var zero = 0;
+		
+			//dataset - # of steps walked by day
+			var dataset = [ 1951, 5823, 4021, 1127, 1722, 4727, 2348, 1483, 1664, 3803, 3235, 5424, 5721, 5541, 
+			                4025, 3744, 754, 1969, 4637, 3995, 6623, 5067, 2461, 11058, 1986, 3450, 10850, 3516];
+							
+					
+			var xScale = d3.scale.linear()
+                              .domain([0,dataset.length])
+                              .range([0,w]);
+			
+			var yScale = d3.scale.linear()
+								 .domain([d3.max(dataset), 0])
+								 .range([0, h]);
+
+			//Define X axis
+			var xAxis =   d3.svg.axis()
+                  			.scale(xScale)
+							.orient("bottom")
+							.ticks(30);
+			//Define Y axis
+			var yAxis =   d3.svg.axis()
+                  			.scale(yScale)
+							.orient("left")
+							.ticks(10);
+							
+			//Create SVG element
+			var svg = d3.select("body")
+						.append("svg")
+						.attr("width", w+margin.left+margin.right)
+						.attr("height", h+margin.top+margin.bottom);
+			
+			svg.selectAll("rect")
+			   .data(dataset)
+			   .enter()
+			   .append("rect")
+			   .attr("x", function(d, i) {
+			   		return ((i * (w / dataset.length)) +margin.left);
+			   })
+			   .attr("y", function(d) {
+			   		return yScale(d);
+			   })
+			   .attr("width", w / dataset.length - barPadding)
+			   .attr("height", function(d) {
+			   		return h-yScale(d) ;
+			   })
+			   .attr("fill", "#1f77b4")
+			   .on("click",function(d) { 
+					// This will run whenever *any* bar is clicked 
+					console.log(d);
+			})
+			;
+				
+			
+			svg.append("text")
+				.attr("id", "subheading")
+				.attr("x", ((w+margin.left)/2))            
+				.attr("y", 15)
+				.attr("text-anchor", "middle")  
+				.style("font-size", "16px") 
+				.style("text-decoration", "underline")  
+				.text("Assignment 4 - Sriram Rao - Number of Steps walked per day - May 2016");
+				
+			svg.append("text")
+				.attr("x", (w/2))             
+				.attr("y", h+margin.top+(margin.bottom)/2)
+				.attr("text-anchor", "middle")  
+				.style("font-size", "12px") 
+				.text("Days");
+			
+			//Create X axis
+			svg.append("g")
+				.attr("class", "axis")
+				.attr("transform", "translate("+ margin.left +"," + (h) + ")")
+				.call(xAxis);
+			
+			//Create Y axis
+			svg.append("g")
+				.attr("class", "axis")
+				.attr("transform", "translate("+ margin.left +","+ zero + ")")
+				.call(yAxis)
+				.append("text")
+				.attr("transform", "rotate(-90)")
+				.attr("y", 6)
+				.attr("dy", ".71em")
+				.style("text-anchor", "end")
+				.text("Num Steps");
+			
+			//On click, update with new data			
+			d3.select("p").on("click", function() {
+					svg.selectAll("rect")
+						.data(dataset)
+						.transition()
+						.duration(5000)
+						.attr("y", function(d) {
+								if(d<10000)
+									d = 10000 - d;
+								else
+									d = 0;
+								return yScale(d);
+						})
+						.attr("height", function(d) {
+								if(d<10000)
+									d = 10000 - d;
+								else
+									d = 0;
+								return h-yScale(d) ;
+						})
+						.attr("fill", "#F65F8A");
+						
+					svg.select("text")
+						.attr("id", "subheading")
+						.transition()
+						.duration(5000)
+						.attr("x", ((w+margin.left)/2))             
+						.attr("y", 25)
+						.attr("text-anchor", "middle")  
+						.style("font-size", "16px") 
+						.style("text-decoration", "underline")  
+						.text("Assignment 4 - Sriram Rao - Number of ADDITIONAL Steps to have walked per day - May 2016");
+					   				
+				});
+		</script>
+		
+	</body>
+</html>
