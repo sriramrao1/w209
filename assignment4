@@ -8,13 +8,11 @@
 			.axis path, 
 			.axis line { fill: none; stroke: black; shape-rendering: crispEdges; } 
 			.axis text { font-family: sans-serif; font-size: 11px; }
-			rect:hover {
-				fill: orange;
-			}
 		</style>
 	</head>
 	<body>
 		<p><input id="btn1" type="submit" value="SUBMIT">Click this button to see the number of additional steps Sriram should have walked to meet the 10000 steps per day requirement</p>
+		<p>Hover over the bars to see change in bar color</p>
 		<!--p>Click on this text to update the chart with new data values (once).</p-->
 		<script type="text/javascript">
 		
@@ -77,11 +75,12 @@
 			   		return h-yScale(d) ;
 			   })
 			   .attr("fill", "#1f77b4")
-			   .on("click",function(d) { 
-					// This will run whenever *any* bar is clicked 
-					console.log(d);
-			})
-			;
+			   .on("mouseover", function(){ 
+					d3.select(this).attr("fill","#F9EE05");
+			   })	
+			   .on("mouseout", function(){ 
+					d3.select(this).attr("fill","#1f77b4");
+			});
 				
 			
 			svg.append("text")
@@ -94,7 +93,7 @@
 				.text("Assignment 4 - Sriram Rao - Number of Steps walked per day - May 2016");
 				
 			svg.append("text")
-				.attr("x", (w/2))             
+				.attr("x", ((w+margin.left)/2))            
 				.attr("y", h+margin.top+(margin.bottom)/2)
 				.attr("text-anchor", "middle")  
 				.style("font-size", "12px") 
@@ -138,7 +137,13 @@
 									d = 0;
 								return h-yScale(d) ;
 						})
-						.attr("fill", "#F65F8A");
+						.attr("fill", "#F65F8A")
+/*						.on("mouseover", function(){ 
+							d3.select(this).attr("fill","#F9EE05");
+						})
+						.on("mouseout", function(){ 
+							d3.select(this).attr("fill","#F65F8A");
+					})*/;
 						
 					svg.select("text")
 						.attr("id", "subheading")
@@ -150,9 +155,7 @@
 						.style("font-size", "16px") 
 						.style("text-decoration", "underline")  
 						.text("Assignment 4 - Sriram Rao - Number of ADDITIONAL Steps to have walked per day - May 2016");
-					   				
 				});
 		</script>
-		
 	</body>
 </html>
