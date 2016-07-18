@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.bar {
+  fill: steelblue;
+}
+
+.bar:hover {
+  fill: brown;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.circle {
+    fill: #222;
+}
+
+p {
+    display: block;
+    margin-top: 1em;
+    margin-bottom: 1em;
+	color:blue;
+	font:30px sans-serif;
+	 text-align: center;
+}
+
+#Steps
+{
+	position:relative;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-left: 5em;
+    margin-right: 0;
+}
+
+#Calories_Burned
+{
+	position:relative;
+	margin-top: -2.3em;
+	margin-left: 9em;
+}
+
+#Activity_Calories
+{
+	position:relative;
+	margin-top: -1.3em;
+	margin-left: 17em;
+}
+
+#Distance
+{
+	position:relative;
+	margin-top: -1.3em;
+	margin-left: 26em;
+}
+	
+#Transition
+{
+	position:absolute;
+	margin-top: 27em;
+	margin-left: 5em;
+}
+
+.mycirc {
+	   stroke-width: 2;
+     stroke: #411dae;
+     fill: #3adddb;
+			
+}
+
+.mycirc:hover {
+  stroke: #170a3d;
+	fill: #181a8f;
+}
+
+
+</style>
+
+
+<p> Olympics Visualization </p>
+<!--div id="Steps">
+    <input name="Steps" 
+                 type="button" 
+                value="Steps" 
+                onclick="updateDataSteps()" />
+</div>
+
+<div id="Calories_Burned">
+    <input name="Calories_Burned" 
+                 type="button" 
+                value="Calories_Burned" 
+                onclick="updateDataCalories_Burned()" />
+</div>
+
+<div id="Activity_Calories">
+    <input name="Activity_Calories" 
+                 type="button" 
+                value="Activity_Calories" 
+                onclick="updateDataActivity_Calories()" /-->
+</div>
+
+<div id="Distance">
+    <!--input name="Distance" type="button" value="Distance" onclick="updateDataDistance()" /-->
+</div>
+
+
+
+<body>
+<script src="d3.js"></script>
+
+<script>
+    var dataset = d3.csv("data.csv");
+/*function updateDataSteps() {
+	
+	d3.select("svg").remove();
+	var margin = {top: 20, right: 20, bottom: 80, left: 50},
+		width = 1800 - margin.left - margin.right,
+		height = 400 - margin.top - margin.bottom
+		barPadding = 1;
+		
+	var x = d3.scale.ordinal()
+		.rangeRoundBands([0, width], .1);
+
+	var y = d3.scale.linear()
+		.range([height, 0]);
+
+	var xAxis = d3.svg.axis()
+		.scale(x)
+		.orient("bottom");
+
+	var yAxis = d3.svg.axis()
+		.scale(y)
+		.orient("left");
+		
+		//.ticks(10, "%");
+	var line = d3.svg.line()
+		.x(function(d) { return x(d.Date); })
+		.y(function(d) { return y(d.Steps); });
+	
+	var svg = d3.select("body").append("svg")
+		.attr("width", width + margin.left + margin.right)
+		.attr("height", height + margin.top + margin.bottom)
+	  .append("g")
+		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+		
+	d3.csv("sashidata.csv", type, function(error, data) {
+	  if (error) throw error;
+
+	  x.domain(data.map(function(d) { return d.Date; }));
+	  y.domain(d3.extent(data, function(d) { return d.Steps; }));
+
+	  svg.append("g")
+		  .attr("class", "x axis")
+		  .attr("transform", "translate(0," + height + ")")
+		  .call(xAxis)
+		  .selectAll("text")	
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", function(d) {
+                return "rotate(-65)" 
+                });
+
+	  svg.append("g")
+		  .attr("class", "y axis")
+		  .call(yAxis)
+		.append("text")
+		  .attr("transform", "rotate(-90)")
+		  .attr("y", 6)
+		  .attr("dy", ".71em")
+		  .style("text-anchor", "end")
+		  .text("Steps");
+
+	  svg.append("path")
+		  .datum(data)
+		  .attr("class", "line")
+		  .attr("d", line);
+	});
+
+}*/
+
+    
+/*function updateDataCalories_Burned() {
+
+    // Get the data again
+	d3.select("svg").remove();
+	var margin = {top: 20, right: 20, bottom: 80, left: 50},
+		width = 1800 - margin.left - margin.right,
+		height = 400 - margin.top - margin.bottom
+		barPadding = 1;
+		
+	var x = d3.scale.ordinal()
+		.rangeRoundBands([0, width], .1);
+
+	var y = d3.scale.linear()
+		.range([height, 0]);
+
+	var xAxis = d3.svg.axis()
+		.scale(x)
+		.orient("bottom");
+
+	var yAxis = d3.svg.axis()
+		.scale(y)
+		.orient("left");
+		
+		//.ticks(10, "%");
+	var line = d3.svg.line()
+		.x(function(d) { return x(d.Date); })
+		.y(function(d) { return y(d.Calories_Burned); });
+	
+	var svg = d3.select("body").append("svg")
+		.attr("width", width + margin.left + margin.right)
+		.attr("height", height + margin.top + margin.bottom)
+	  .append("g")
+		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+		
+	d3.csv("sashidata.csv", type, function(error, data) {
+	  if (error) throw error;
+
+	  x.domain(data.map(function(d) { return d.Date; }));
+	  y.domain(d3.extent(data, function(d) { return d.Calories_Burned; }));
+
+	  svg.append("g")
+		  .attr("class", "x axis")
+		  .attr("transform", "translate(0," + height + ")")
+		  .call(xAxis)
+		  .selectAll("text")	
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", function(d) {
+                return "rotate(-65)" 
+                });
+
+	  svg.append("g")
+		  .attr("class", "y axis")
+		  .call(yAxis)
+		.append("text")
+		  .attr("transform", "rotate(-90)")
+		  .attr("y", 6)
+		  .attr("dy", ".71em")
+		  .style("text-anchor", "end")
+		  .text("Calories Burned");
+
+	  svg.append("path")
+		  .datum(data)
+		  .attr("class", "line")
+		  .attr("d", line);
+	});
+
+}*/
+
+/*function updateDataActivity_Calories() {
+
+    // Get the data again
+	d3.select("svg").remove();
+	var margin = {top: 20, right: 20, bottom: 80, left: 50},
+		width = 1800 - margin.left - margin.right,
+		height = 400 - margin.top - margin.bottom
+		barPadding = 1;
+		
+	var x = d3.scale.ordinal()
+		.rangeRoundBands([0, width], .1);
+
+	var y = d3.scale.linear()
+		.range([height, 0]);
+
+	var xAxis = d3.svg.axis()
+		.scale(x)
+		.orient("bottom");
+
+	var yAxis = d3.svg.axis()
+		.scale(y)
+		.orient("left");
+		
+		//.ticks(10, "%");
+	var line = d3.svg.line()
+		.x(function(d) { return x(d.Date); })
+		.y(function(d) { return y(d.Activity_Calories); });
+	
+	var svg = d3.select("body").append("svg")
+		.attr("width", width + margin.left + margin.right)
+		.attr("height", height + margin.top + margin.bottom)
+	  .append("g")
+		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+		
+	d3.csv("sashidata.csv", type, function(error, data) {
+	  if (error) throw error;
+
+	  x.domain(data.map(function(d) { return d.Date; }));
+	  y.domain(d3.extent(data, function(d) { return d.Activity_Calories; }));
+
+	  svg.append("g")
+		  .attr("class", "x axis")
+		  .attr("transform", "translate(0," + height + ")")
+		  .call(xAxis)
+		  .selectAll("text")	
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", function(d) {
+                return "rotate(-65)" 
+                });
+
+	  svg.append("g")
+		  .attr("class", "y axis")
+		  .call(yAxis)
+		.append("text")
+		  .attr("transform", "rotate(-90)")
+		  .attr("y", 6)
+		  .attr("dy", ".71em")
+		  .style("text-anchor", "end")
+		  .text("Activity Calories");
+
+	  svg.append("path")
+		  .datum(data)
+		  .attr("class", "line")
+		  .attr("d", line);
+	});
+
+}*/
+
+// Get the data again
+	d3.select("svg").remove();
+	var margin = {top: 20, right: 20, bottom: 80, left: 50},
+		width = 1000 - margin.left - margin.right,
+		height = 600 - margin.top - margin.bottom
+		barPadding = 1;
+		barPadding = 1;
+		
+	
+
+	d3.csv("data.csv", type, function(error, data) {
+	  if (error) throw error;
+
+      data.forEach(function(d) {
+        d.MedalCount = +d.MedalCount;
+        });
+
+      var max = d3.max(data, function(d) { return d.MedalCount; });
+    
+      var x = d3.scale.ordinal()
+		.rangeRoundBands([0, width], .1);
+
+      var y = d3.scale.linear()
+        .domain([max, 0])
+		.range([height, 0]);
+
+	   var xAxis = d3.svg.axis()
+		.scale(x)
+		.orient("bottom");
+
+	   var yAxis = d3.svg.axis()
+		.scale(y)
+		.orient("left")
+        .ticks(10)
+       ;
+			
+	   var line = d3.svg.line()
+		.x(function(d) { return x(d.Edition); })
+		.y(function(d) { return y(d.MedalCount); });
+	
+	   var svg = d3.select("body").append("svg")
+		.attr("width", width + margin.left + margin.right)
+		.attr("height", height + margin.top + margin.bottom)
+	  .append("g")
+		.attr("transform", "translate(" + margin.left + "," + margin.top + ")");    
+        
+	  x.domain(data.map(function(d) { return d.Edition; }));
+	  y.domain(d3.extent(data, function(d) { return d.MedalCount; }));
+
+	  svg.append("g")
+		  .attr("class", "x axis")
+		  .attr("transform", "translate(0," + height + ")")
+		  .call(xAxis)
+		  .selectAll("text")	
+            .style("text-anchor", "end")
+            .attr("dx", "-.8em")
+            .attr("dy", ".15em")
+            .attr("transform", function(d) {
+                return "rotate(-1)" 
+                })
+      ;
+
+	  svg.append("g")
+		  .attr("class", "y axis")
+		  .call(yAxis)
+		.append("text")
+		  .attr("transform", "rotate(-90)")
+		  .attr("y", 6)
+		  .attr("dy", ".71em")
+		  .style("text-anchor", "end")
+		  .text("Medal Count");
+
+	  svg.append("path")
+		  .datum(data)
+		  .attr("class", "line")
+		  .attr("d", line);
+	});	
+
+function updateDataDistance() {
+}
+
+function type(d) {
+  d.Edition = +d.Edition;
+  d.MedalCount = +d.MedalCount;
+  
+  return d;
+}
+
+</script>
