@@ -1,6 +1,10 @@
 
 .container {
-  width: 1050px;
+  width: 900px;
+}
+
+.bodycontainer {
+  width: 700px;
 }
 
 .rcorners {    
@@ -9,6 +13,7 @@
 }   
 
 h1 {
+  font-family: "Arial", Georgia, Serif;
   font-size: 24px;
   padding: 0px 0 5px 0;
   line-height: 1.2em;
@@ -17,7 +22,17 @@ h1 {
 }
 
 h2 {
+  font-family: "Arial", Georgia, Serif;
   font-size: 19px;
+  padding: 0px 0 5px 0;
+  line-height: 1.2em;
+  color: #000;
+  margin-bottom: 0px;
+}
+
+text {
+  font-family: "Source Code Pro", Inconsolata, "Lucida Console", Terminal, "Arial", Courier;
+  font-size: 12px;
   padding: 0px 0 5px 0;
   line-height: 1.2em;
   color: #000;
@@ -47,7 +62,7 @@ h2 {
 }
 
 svg {
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .background {
@@ -58,14 +73,40 @@ svg {
   fill: #FADBD8;
 }
 
+.bluearea {
+  fill: #ADE3FA;
+}
+
+.greenarea {
+  fill: #BBFAAE;
+}
+
 .line {
   fill: none;
   stroke: #CB4335;
-  stroke-width: 2.0px;
+  stroke-width: 3.0px;
+}
+
+.blueline {
+  fill: none;
+  stroke: #337AFF;
+  stroke-width: 3.0px;
+}
+
+.greenline {
+  fill: none;
+  stroke: #267A15;
+  stroke-width: 3.0px;
 }
 
 .title {
   font-size: 12px;
+  font-family: "Arial", Georgia, Serif;
+}
+title {
+  font-size: 24px;
+  font-family: "Arial", Georgia, Serif;
+  
 }
 
 .axis line, .grid line {
