@@ -3,8 +3,8 @@
 
   SmallMultiples = function() {
     var area, bisect, caption, chart, circle, curYear, data, format, height, line, margin, mousemove, mouseout, mouseover, setupScales, width, xScale, xValue, yAxis, yScale, yValue;
-    width = 250;
-    height = 200;
+    width = 200;
+    height = 175;
     margin = {
       top: 15,
       right: 10,
