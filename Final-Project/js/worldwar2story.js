@@ -63,10 +63,10 @@
         g = svg.select("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
         g.append("rect").attr("class", "background").style("pointer-events", "all").attr("width", width + margin.right).attr("height", height).on("mouseover", mouseover).on("mousemove", mousemove).on("mouseout", mouseout);
         lines = g.append("g");
-        lines.append("path").attr("class", "area").style("pointer-events", "none").attr("d", function(c) {
+        lines.append("path").attr("class", "greenarea").style("pointer-events", "none").attr("d", function(c) {
           return area(c.values);
         });
-        lines.append("path").attr("class", "line").style("pointer-events", "none").attr("d", function(c) {
+        lines.append("path").attr("class", "greenline").style("pointer-events", "none").attr("d", function(c) {
           return line(c.values);
         });
         lines.append("text").attr("class", "title").attr("text-anchor", "middle").attr("y", height).attr("dy", margin.bottom / 2 + 5).attr("x", width / 2).text(function(c) {
@@ -163,7 +163,7 @@
         name: function(e) {
           var d;
           d = d3.select(e).datum();
-          return d.key;
+          return d.Id;
         }
       }
     });
